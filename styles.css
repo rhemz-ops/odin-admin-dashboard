@@ -27,7 +27,7 @@
   }
 
 .icon {
-    /* filter: invert(100%); */
+    filter: invert(100%);
     width: 24px;
 }
 
@@ -38,10 +38,15 @@
     --text-size-normal: clamp(14px, 2vw, 1.125rem);
     --text-size-name: clamp(16px ,2.5vw, 1.5rem);
     --text-size-heading: clamp(2rem, 4vw, 3rem);
+
+    --header-bgcolor: #0F0F0F;
+    --main-bgcolor: #232D3F;
+    --sidebar-bgcolor: #005B41;
+    --card-bgcolor: #008170;
 }  
 
 .prof-pic {
-    border: 1px solid black;
+    border: 1px solid whitesmoke;
     border-radius: 50%;
 }
 
@@ -68,17 +73,20 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 180px 1fr;
     font-family: 'wotfardregular', sans-serif;
 }
 
 .header {
-    background-color: whitesmoke;
+    background-color: var(--header-bgcolor);
+    color: whitesmoke;
     grid-column: 2;
     grid-row: 1;
 
     display: grid;
     grid-template-columns: 2fr 1fr;
+    box-shadow: 0px 0px 20px 0px black;
+    z-index: 1;
 }
 
 .left-col .left-top-row {
@@ -93,7 +101,7 @@
     border: none;
     border-radius: 20px;
     background-color: #cccccc;
-    padding: 4px;
+    padding: 4px 8px;
 
 }
 
@@ -130,20 +138,192 @@
     padding: 8px 16px;
     border: none;
     border-radius: 20px;
-    background-color: rgb(84, 157, 216);
+    background-color: var(--sidebar-bgcolor);
     color: whitesmoke;
     cursor: pointer;
+    transition: .3s;
+}
+
+.right-bot-row button:hover {
+    background-color: #006d4e;
 }
 
 .sidebar {
-    border: 1px solid blue;
+    background-color: var(--sidebar-bgcolor);
+    color: white;
     grid-column: 1;
     grid-row: 1 / 3;
+    z-index: 1;
+}
+
+.sidebar .title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: var(--text-size-name);
+    font-weight: bold;
+    padding: 1rem 2rem;
+}
+
+.sidebar .title img {
+    width: clamp(18px, 3vw, 3rem);
+}
+
+.sidebar .icon {
+    filter: invert(100%);
+}
+
+.sidebar .top {
+    margin-bottom: 3rem;
+}
+
+.sidebar .top > div, .sidebar .bot > div{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.sidebar > div {
+    margin-bottom: 1rem;
 }
 
 .main {
-    border: 1px solid greenyellow;
+    background-color: var(--main-bgcolor);
     grid-column: 2;
     grid-row: 2;
+    color: whitesmoke;
 }
+
+.main-container {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    row-gap: 5rem;
+    position: relative;
+}
+
+.main-container::before {
+    content: "Your Projects";
+    font-size: 26px;
+    position: absolute;
+    font-weight: bold;
+    top: -45px;
+    left: 4rem;
+}
+
+.main .projects {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    display: grid;
+    gap: 2rem;
+    padding: 1rem 1rem 1rem 4rem;
+    padding-top: 0;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.main .projects .card {
+    background-color: var(--card-bgcolor);
+    border-left: 10px solid orange;
+    border-radius: 16px;
+    box-shadow: 6px 6px 12px black;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.main .projects .card:hover {
+    background-color: #019783;
+    border-left-width: 15px;
+}
+
+
+.main .projects .card .icons {
+    align-self: flex-end;
+    display: flex;
+    gap: 1rem;
+}
+
+.top-widget {
+    display: grid;
+    justify-items: center;
+    position: relative;
+    width: 80%;
+}
+
+.top-widget::before {
+    content: "Announcement";
+    font-size: 26px;
+    position: absolute;
+    font-weight: bold;
+    top: -45px;
+    left: 0;
+}
+
+.bot-widget {
+    display: grid;
+    justify-items: center;
+    position: relative;
+    width: 80%;
+    padding-bottom: 1rem;
+}
+
+.bot-widget h2 {
+    justify-self: self-start;
+    margin-left: 3rem;
+}
+
+.widget-card {
+    font-size: 1rem;
+    border-radius: 12px;
+    background-color: var(--card-bgcolor);
+    box-shadow: 6px 6px 12px black;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}
+
+.bot-widget::before {
+    content: "Trending";
+    font-size: 26px;
+    position: absolute;
+    font-weight: bold;
+    top: -45px;
+    left: 0;
+}
+
+.widget-section {
+    border-bottom: 1px solid gray;
+}
+
+.widget-section p{
+    padding-bottom: 1rem;
+}
+
+.bot-widget .widget-card {
+    display: flex;
+    align-items: center;
+}
+
+.widget-trend {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+}
+
+
 
